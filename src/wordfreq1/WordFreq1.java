@@ -20,7 +20,7 @@ public class WordFreq1
         //Variables
         //create TreeMap
         TreeMap<String, Integer> tree = new TreeMap<String, Integer>();
-        String fileName = "";
+        String fileName = "sample.txt";
         String fileInput = "";
 
         //buffer input so we can read it in properly and read it in
@@ -44,9 +44,8 @@ public class WordFreq1
 
         insertWord(items, tree, itemValue);
 
-        printTree(tree);
-
-        printTime(startTime);
+        Long endTime = printTree(tree);
+        printTime(startTime, endTime);
     }
 
     private static String getInputFile(String[] args) throws IOException
@@ -109,26 +108,32 @@ public class WordFreq1
         return items;
     }
 
-    private static void printTime(long startTime)
+    private static void printTime(long startTime, Long endTime)
     {
-        //records the current runtime of the program
-        long endTime = System.currentTimeMillis();
-
+        try
+        {
+            Thread.sleep(1000);                 //1000 milliseconds is one second.
+        }
+        catch (InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
         //takes the two times measured, subtracts the last time from the first time then displays the difference to show the total runtime in ms
         System.err.println("Total execution time: " + (endTime - startTime) + " ms");
     }
 
-    private static void printTree(TreeMap<String, Integer> tree)
+    private static Long printTree(TreeMap<String, Integer> tree)
     {
         //calls the print function of the tree to print all of the sections in a in order traversal
         System.err.println("Here are the contents of your tree:");
         System.err.println();
         //tree.print();
-
         for (Map.Entry<String, Integer> entry : tree.entrySet())
         {
             System.out.println(entry.getKey() + " = " + entry.getValue());
         }
+        //records the current runtime of the program and returns it
+        return System.currentTimeMillis();
     }
 
     //calls insert function of the tree class to store the words from the string array into the nodes
