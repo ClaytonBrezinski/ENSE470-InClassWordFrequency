@@ -12,9 +12,11 @@ import java.util.Scanner;
 //new library used for tree
 import java.util.TreeMap;
 
-public class WordFreq1 {
+public class WordFreq1
+{
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException
+    {
         //Variables
         //create TreeMap
         TreeMap<String, Integer> tree = new TreeMap<String, Integer>();
@@ -29,7 +31,8 @@ public class WordFreq1 {
         long startTime = System.currentTimeMillis();
 
         //prints name of file to make sure user typed in the correct file
-        if (fileName != null) {
+        if (fileName != null)
+        {
             System.err.println(fileName);
         }
 
@@ -46,27 +49,33 @@ public class WordFreq1 {
         printTime(startTime);
     }
 
-    private static String getInputFile(String[] args) throws IOException {
+    private static String getInputFile(String[] args) throws IOException
+    {
         BufferedReader input;
         String fileName;
         //prompt for selecting text file
         System.err.println("Please enter the txt file you would like to use: ");
         //checks for input from the command line so that it can run the program properly
-        if (args.length != 1) {
+        if (args.length != 1)
+        {
             input = new BufferedReader(new InputStreamReader(System.in));
             fileName = input.readLine();
             input.close();
-        } else {
+        }
+        else
+        {
             fileName = args[0];
         }
         return fileName;
     }
 
-    private static String scanInput(String fileName, String fileInput) throws FileNotFoundException {
+    private static String scanInput(String fileName, String fileInput) throws FileNotFoundException
+    {
         //create scanner for use filtering and modifying input text
         Scanner sc = new Scanner(new File(fileName));
         //inputs text from scanner into a string variable for manipulation
-        while (sc.hasNextLine()) {
+        while (sc.hasNextLine())
+        {
             fileInput += sc.nextLine();
             fileInput += "\n";
         }
@@ -78,15 +87,18 @@ public class WordFreq1 {
         return fileInput;
     }
 
-    private static int[] getItemValues(String[] items) {
+    private static int[] getItemValues(String[] items)
+    {
         int[] itemValue = new int[items.length];
-        for (int i = 0; i < items.length; i++) {
+        for (int i = 0; i < items.length; i++)
+        {
             itemValue[i] = 0;
         }
         return itemValue;
     }
 
-    private static String[] manipulateFileInput(String fileInput) {
+    private static String[] manipulateFileInput(String fileInput)
+    {
         //this section manipulates the string to properly manipulate it to lower case
         fileInput = fileInput.toLowerCase();
         //replaces all number and special characters (excluding apostrophes) with spaces
@@ -97,7 +109,8 @@ public class WordFreq1 {
         return items;
     }
 
-    private static void printTime(long startTime) {
+    private static void printTime(long startTime)
+    {
         //records the current runtime of the program
         long endTime = System.currentTimeMillis();
 
@@ -105,25 +118,32 @@ public class WordFreq1 {
         System.err.println("Total execution time: " + (endTime - startTime) + " ms");
     }
 
-    private static void printTree(TreeMap<String, Integer> tree) {
+    private static void printTree(TreeMap<String, Integer> tree)
+    {
         //calls the print function of the tree to print all of the sections in a in order traversal
         System.err.println("Here are the contents of your tree:");
         System.err.println();
         //tree.print();
 
-        for (Map.Entry<String, Integer> entry : tree.entrySet()) {
+        for (Map.Entry<String, Integer> entry : tree.entrySet())
+        {
             System.out.println(entry.getKey() + " = " + entry.getValue());
         }
     }
 
     //calls insert function of the tree class to store the words from the string array into the nodes
-    private static void insertWord(String[] items, TreeMap<String, Integer> tree, int[] itemValue) {
+    private static void insertWord(String[] items, TreeMap<String, Integer> tree, int[] itemValue)
+    {
 
-        for (int i = 0; i < items.length; i++) {
+        for (int i = 0; i < items.length; i++)
+        {
             //tree.insert(items[i]);
-            if (tree.containsKey(items[i])) {
+            if (tree.containsKey(items[i]))
+            {
                 tree.replace(items[i], tree.get(items[i]) + 1);
-            } else {
+            }
+            else
+            {
                 tree.put(items[i], itemValue[i] + 1);
             }
         }
